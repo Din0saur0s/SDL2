@@ -106,7 +106,7 @@ $conn->close();
 </body>
 </html>
 ```
-##
+## Запуск
 Поднимем контейнеры из папки, содержащей файл docker-compose.yml:
 ```{r}
 docker-compose up -d
@@ -131,6 +131,15 @@ sh docker-bench-security.sh
 ![image](https://github.com/Din0saur0s/SDL2/assets/70744702/0493e76b-528a-4dc6-9aef-282f8d0c1e13)
 ![image](https://github.com/Din0saur0s/SDL2/assets/70744702/c0e11fc4-d574-460d-8f6a-672f2a495cbe)
 
-
-
+## Исправление ошибок
+4.6 Ensure that HEALTHCHECK instructions have been added to container images
+Добавляем в Dockerfile.
+```{r}
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+5.26 Ensure that the container is restricted from acquiring additional privileges
+```{r}
+docker run --rm -it --security-opt=no-new-privileges ubuntu bash
+```
 
